@@ -1,0 +1,66 @@
+version: '3.2'
+services:
+#  mongodb:
+#    image: 'bitnami/mongodb:latest'
+#    ports:
+#      - "27017:27017"
+#  postgres:
+#    image: postgres
+#    volumes:
+#      - ./tmp/db:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      PGDATA: /tmp
+  client-app:
+    build:
+      context: ./client-app
+      dockerfile: Dockerfile
+    volumes:
+      - '/usr/src/app/node_modules'
+    command: npm start -p 3000 -b '0.0.0.0'
+    ports:
+      - "3100:3000"
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_TB_IP=localhost
+      - REACT_APP_GATEWAY_PORT=3102
+    tty: true
+  authentication:
+    build:
+      context: ./authentication
+      dockerfile: Dockerfile
+    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    volumes:
+      - ./authentication:/authentication
+      - type: tmpfs
+        target: /authentication/tmp/pids/
+    ports:
+      - "3101:80"
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    volumes:
+      - ./gateway:/gateway
+      - type: tmpfs
+        target: /gateway/tmp/pids/
+    environment:
+      - AUTHENTICATION_URL=http://authentication:80
+      - PERFORMER_URL=http://performer:8080
+      - CLIENT_APP=http://localhost:3100
+    ports:
+      - "3102:80"
+  performer:
+    build:
+      context: ./performer
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - GATEWAY_URL=http://gateway:80
+    command: ["java",  "-jar", "/app.jar"]
+    ports:
+      - "3103:8080"
+
+

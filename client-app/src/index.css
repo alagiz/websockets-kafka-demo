@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'roboto' !important;
+}
+
+@font-face {
+  font-family: 'roboto regular';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.loader-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  justify-content: center;
+  z-index: 999999999;
+}
+
+.overlay {
+    background: #e9e9e9;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+    z-index: 1151;
+    align-items: center;
+}

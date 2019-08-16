@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.center {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(../../lis_background.jpg);
+}
+
+.unauthorized-warning {
+    color: #FF7F45;
+    font-size: 15px;
+    font-weight: bold;
+    height: 20px;
+}
+
+.unauthorized-warning-icon {
+    margin-right: 6px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 0.8rem;
+}
+
+.card > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.card h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.rabbit-icon {
+    width: 56px;
+}
+
+.login-card {
+    display: flex;
+    height: 28em;
+}
+
+.login-card-left-side {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 17.5em;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.login-card-left-side-icon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 5em;
+}
+
+.login-card-left-side-title {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: white;
+}
+
+.login-card-left-side-version {
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+    color: rgba(256, 256, 256, 0.5);
+}
+
+.login-card-right-side {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 27.5em;
+}
+
+.login-card-right-side-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5em;
+}
+
+.login-card-right-side-title {
+    padding-bottom: 1em;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.login-card-right-side > .form > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 15px;
+    padding-bottom: 3px;
+}
+
+.form-item {
+    font-family: 'Roboto', sans-serif;
+    padding: 5px;
+    margin-bottom: 1rem;
+    height: 30px;
+    width: 16rem;
+    border: 1px solid grey;
+}
+
+.form-submit {
+    display: flex;
+    justify-content: center;
+    height: 2.5em;
+    width: 10em;
+    color: #fff;
+    background-color: #0AA8FB;
+    border: none;
+    transition: 0.3s opacity ease;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.form-submit:hover {
+    background-color: #1B3E93;
+}
+
+input::placeholder {
+    color: #E2E2E2;
+}
+
+.form-submit:focus {
+    background-color: #FF7f45;
+}
+
+.form-button {
+    display: flex;
+    justify-content: flex-end;
+    width: 16rem;
+    margin-top: 3em;
+}
+

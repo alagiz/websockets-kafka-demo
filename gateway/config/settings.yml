@@ -1,0 +1,5 @@
+authentication_service: <%= ENV['AUTHENTICATION_URL'] %>
+#authentication_service: http://localhost:3001
+performer_service: <%= ENV['PERFORMER_URL'] %>
+client_app: <%= ENV['CLIENT_APP_URL'] %>
+#performer_service: http://localhost:8080
