@@ -51,3 +51,6 @@ gem 'multipart-post'
 gem 'config'
 
 gem 'jwt'
+
+gem 'waterdrop'
+gem 'karafka'

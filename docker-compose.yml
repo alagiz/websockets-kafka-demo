@@ -1,17 +1,20 @@
 version: '3.2'
 services:
-#  mongodb:
-#    image: 'bitnami/mongodb:latest'
-#    ports:
-#      - "27017:27017"
-#  postgres:
-#    image: postgres
-#    volumes:
-#      - ./tmp/db:/var/lib/postgresql/data
-#    ports:
-#      - "5432:5432"
-#    environment:
-#      PGDATA: /tmp
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - "zookeeper"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   client-app:
     build:
       context: ./client-app
@@ -41,7 +44,7 @@ services:
     build:
       context: ./gateway
       dockerfile: Dockerfile
-    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    command: bash -c "bundle exec karafka server --daemon && bundle exec rails s -p 80 -b '0.0.0.0'"
     volumes:
       - ./gateway:/gateway
       - type: tmpfs
@@ -50,6 +53,8 @@ services:
       - AUTHENTICATION_URL=http://authentication:80
       - PERFORMER_URL=http://performer:8080
       - CLIENT_APP=http://localhost:3100
+    depends_on:
+      - "kafka"
     ports:
       - "3102:80"
   performer:

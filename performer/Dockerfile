@@ -5,6 +5,6 @@ COPY pom.xml /usr/src/performer
 
 RUN mvn -f /usr/src/performer/pom.xml install
 
-FROM openjdk:8
+FROM openjdk:8-jre-alpine
 
 COPY --from=BUILD /usr/src/performer/target/*.jar  /app.jar
