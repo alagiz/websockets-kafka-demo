@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class JobsResponder < ApplicationResponder
+class JobRequestResponder < ApplicationResponder
   topic 'queueing.job.request'
 
   def respond(event_payload)

@@ -4,13 +4,9 @@ import com.white.rabbit.performer.model.Job;
 import com.white.rabbit.performer.producer.JobSender;
 import com.white.rabbit.performer.repository.JobStorage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
@@ -18,16 +14,11 @@ import java.util.stream.IntStream;
 @Service
 public class JobService {
     private JobStorage jobStorage;
-//    private final RestTemplate restTemplate;
-//    private final String baseUri = System.getenv("GATEWAY_URL") + "/notify_job_status/";
-//    private HttpHeaders headers = new HttpHeaders();
     private JobSender jobSender;
 
     @Autowired
-    public JobService(RestTemplateBuilder restTemplateBuilder, JobStorage jobStorage, JobSender jobSender) {
-//        this.restTemplate = restTemplateBuilder.build();
+    public JobService(JobStorage jobStorage, JobSender jobSender) {
         this.jobStorage = jobStorage;
-//        this.headers.setContentType(MediaType.APPLICATION_JSON);
         this.jobSender = jobSender;
     }
 
@@ -68,10 +59,17 @@ public class JobService {
     }
 
     private void notifyProgress(Job job) {
-//        HttpEntity<Job> request = new HttpEntity<>(job, headers);
-//
-//        this.restTemplate.postForObject(baseUri, request, Job.class);
         this.jobSender.send(job);
+    }
 
+    public void notifyAllJobs(Job job) {
+        List<Job> jobList = this.getJobsByUserId(job.getUserId());
+        jobList = jobList == null ? new ArrayList<>() : jobList;
+        Job jobListContainer = new Job();
+
+        jobListContainer.setJobList(jobList);
+        jobListContainer.setUserId(job.getUserId());
+
+        this.jobSender.sendAllJobs(jobListContainer);
     }
 }

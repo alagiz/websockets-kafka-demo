@@ -25,4 +25,11 @@ public class JobReceiver {
 
         new Thread(() -> jobService.startJob(job.getUserId())).start();
     }
+
+    @KafkaListener(topics = "queueing.job.all")
+    public void receiveRequestAll(Job job) {
+        LOGGER.info("received request for all jobs='{}'", job.getUserId());
+
+        jobService.notifyAllJobs(job);
+    }
 }

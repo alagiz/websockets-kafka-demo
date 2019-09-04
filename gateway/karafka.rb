@@ -27,9 +27,12 @@ class KarafkaApp < Karafka::App
   # Karafka.monitor.subscribe(Karafka::Instrumentation::ProctitleListener)
 
   consumer_groups.draw do
-    consumer_group :notify do
+    consumer_group :jobs do
       topic 'queueing.job.notify' do
         consumer JobsConsumer
+      end
+      topic 'queueing.jobs.all.notify' do
+        consumer AllJobsConsumer
       end
     end
   end

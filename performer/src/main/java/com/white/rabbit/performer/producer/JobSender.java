@@ -12,14 +12,22 @@ import org.springframework.stereotype.Service;
 public class JobSender {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobSender.class);
 
-    @Value("${spring.kafka.producer.topic}")
-    private String jsonTopic;
+    @Value("${spring.kafka.producer.queueing-job-notify-topic}")
+    private String jobNotifyTopic;
+
+    @Value("${spring.kafka.producer.queueing-all-jobs-fetch-topic}")
+    private String allJobsTopic;
 
     @Autowired
     private KafkaTemplate<String, Job> kafkaTemplate;
 
     public void send(Job job) {
         LOGGER.info("sending job='{}'", job);
-        kafkaTemplate.send(jsonTopic, job);
+        kafkaTemplate.send(jobNotifyTopic, job);
+    }
+
+    public void sendAllJobs(Job job) {
+        LOGGER.info("sending job list='{}'", job);
+        kafkaTemplate.send(allJobsTopic, job);
     }
 }
