@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :authenticate, only: %i[index create]
   resources :perform, only: %i[index create destroy]
   resources :notify_job_status, only: %i[create]
+  resources :notify_jobs, only: %i[create]
   get 'authenticate/stale'
 end

@@ -12,6 +12,7 @@ import CableApp from "../../utils/CableService";
 const Auth = new AuthService();
 const Step = Steps.Step;
 const gatewayUrl = `http://${process.env.REACT_APP_TB_IP}:${process.env.REACT_APP_GATEWAY_PORT}`
+// const gatewayUrl = `http://localhost:3102`
 
 class App extends Component {
     state = {
@@ -25,25 +26,34 @@ class App extends Component {
     }
 
     componentDidMount() {
-        CableApp.cable.subscriptions.create({channel: 'WebNotificationsChannel', id: this.props.user.username}, {
+        CableApp.cable.subscriptions.create({channel: 'JobStateNotificationsChannel', id: this.props.user.username}, {
             received: data => {
                 this.updateJobs(data)
             }
         });
-        CableApp.cable.subscriptions.create('JobsChannel', {
+        CableApp.cable.subscriptions.create('AllJobsChannel', {
             received: data => {
-                this.updateJobs(data)
-            }
-        })
+                const jobList = data.jobList;
 
-        this.setCurrentJobs();
+                this.setState({jobs: isEmpty(jobList) ? [] : jobList});
+            },
+            connected: data => this.setCurrentJobs()
+        });
     }
 
     componentWillUnmount() {
-        CableApp.cable.subscriptions.remove({channel: 'WebNotificationsChannel', id: this.props.user.username}, {
+        CableApp.cable.subscriptions.remove({channel: 'JobStateNotificationsChannel', id: this.props.user.username}, {
             received: data => {
                 this.updateJobs(data)
             }
+        });
+        CableApp.cable.subscriptions.remove({channel: 'AllJobsChannel'}, {
+            received: data => {
+                const jobList = data.jobList;
+
+                this.setState({jobs: isEmpty(jobList) ? [] : jobList});
+            },
+            connected: data => this.setCurrentJobs()
         });
     }
 

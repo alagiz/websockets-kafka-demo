@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-class NotifyJobStatusController < ApplicationController
+class NotifyJobsController < ApplicationController
   def create
-    job = params[:notify_job_status]
+    job = params[:notify_job]
 
     ActionCable.server.broadcast(
-        "job_state_notification_channel_#{job[:userId]}",
-        job: job,
+        "all_jobs_channel",
+        jobList: job[:jobList],
         time_stamp: Time.now.to_s
     )
 
     if job[:userId] != "rabbit-admin"
       ActionCable.server.broadcast(
-          "job_state_notification_channel_rabbit-admin",
-          job: job,
+          "all_jobs_channel",
+          jobList: job[:jobList],
           time_stamp: Time.now.to_s
       )
     end
