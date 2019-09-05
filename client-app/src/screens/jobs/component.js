@@ -57,16 +57,6 @@ class App extends Component {
         });
     };
 
-    setCurrentJobs = () => {
-        axios.get(`${gatewayUrl}/perform?userId=${this.props.user.username}`)
-            .then(data => {
-                console.log(data)
-
-                this.setState({jobs: isEmpty(data.data) ? [] : data.data})
-            })
-            .catch(e => console.log(e));
-    };
-
     updateJobs = data => {
         console.log("received data through ws!")
         console.log(data)
@@ -86,7 +76,7 @@ class App extends Component {
     handleStartComputation = () => CableApp.cable.subscriptions.subscriptions[0].send({userId: this.props.user.username});
 
     handleRemoveAllJobs = () => axios.delete(`${gatewayUrl}/perform/all`)
-        .then(() => this.setCurrentJobs())
+        .then(() => this.setState({jobs: []}))
         .catch(e => console.log(e));
 
     render() {
