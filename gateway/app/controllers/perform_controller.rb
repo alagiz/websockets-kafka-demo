@@ -1,18 +1,6 @@
 # frozen_string_literal: true
 
 class PerformController < ApplicationController
-  def create
-    JobRequestResponder.call(params[:perform].to_json)
-
-    :ok
-  end
-
-  def index
-    AllJobsRequestResponder.call({:userId => params[:userId]}.to_json)
-
-    :ok
-  end
-
   def destroy
     conn = Faraday.new(url: Settings.performer_service)
 

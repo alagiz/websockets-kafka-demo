@@ -23,7 +23,7 @@ class App extends Component {
         Auth.logout();
 
         this.props.history.replace('/login');
-    }
+    };
 
     componentDidMount() {
         CableApp.cable.subscriptions.create({channel: 'JobStateNotificationsChannel', id: this.props.user.username}, {
@@ -37,9 +37,9 @@ class App extends Component {
 
                 this.setState({jobs: isEmpty(jobList) ? [] : jobList});
             },
-            connected: data => this.setCurrentJobs()
+            connected: () => CableApp.cable.subscriptions.subscriptions[1].send({userId: this.props.user.username})
         });
-    }
+    };
 
     componentWillUnmount() {
         CableApp.cable.subscriptions.remove({channel: 'JobStateNotificationsChannel', id: this.props.user.username}, {
@@ -53,9 +53,9 @@ class App extends Component {
 
                 this.setState({jobs: isEmpty(jobList) ? [] : jobList});
             },
-            connected: data => this.setCurrentJobs()
+            connected: () => CableApp.cable.subscriptions.subscriptions[1].send({userId: this.props.user.username})
         });
-    }
+    };
 
     setCurrentJobs = () => {
         axios.get(`${gatewayUrl}/perform?userId=${this.props.user.username}`)
@@ -65,7 +65,7 @@ class App extends Component {
                 this.setState({jobs: isEmpty(data.data) ? [] : data.data})
             })
             .catch(e => console.log(e));
-    }
+    };
 
     updateJobs = data => {
         console.log("received data through ws!")
@@ -81,13 +81,9 @@ class App extends Component {
         }
 
         this.setState({jobs: jobs});
-    }
+    };
 
-    handleStartComputation = () => axios.post(`${gatewayUrl}/perform`, {
-        userId: this.props.user.username
-    })
-        .then(r => console.log(r))
-        .catch(e => console.log(e));
+    handleStartComputation = () => CableApp.cable.subscriptions.subscriptions[0].send({userId: this.props.user.username});
 
     handleRemoveAllJobs = () => axios.delete(`${gatewayUrl}/perform/all`)
         .then(() => this.setCurrentJobs())
