@@ -42,19 +42,8 @@ class App extends Component {
     };
 
     componentWillUnmount() {
-        CableApp.cable.subscriptions.remove({channel: 'JobStateNotificationsChannel', id: this.props.user.username}, {
-            received: data => {
-                this.updateJobs(data)
-            }
-        });
-        CableApp.cable.subscriptions.remove({channel: 'AllJobsChannel'}, {
-            received: data => {
-                const jobList = data.jobList;
-
-                this.setState({jobs: isEmpty(jobList) ? [] : jobList});
-            },
-            connected: () => CableApp.cable.subscriptions.subscriptions[1].send({userId: this.props.user.username})
-        });
+        CableApp.cable.connection.close();
+        CableApp.cable.subscriptions.subscriptions.map(subscription => CableApp.cable.subscriptions.remove(subscription));
     };
 
     updateJobs = data => {
