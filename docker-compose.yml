@@ -29,7 +29,7 @@ services:
     build:
       context: ./authentication
       dockerfile: Dockerfile
-    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
     volumes:
       - ./authentication:/authentication
       - type: tmpfs

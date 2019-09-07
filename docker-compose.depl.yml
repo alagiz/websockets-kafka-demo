@@ -10,7 +10,7 @@ services:
       - BACKEND_PORT=3102
   authentication:
     image: websockets-kafka-demo_authentication:latest
-    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
     ports:
       - "3101:80"
   gateway:
