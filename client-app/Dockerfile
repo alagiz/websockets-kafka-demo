@@ -1,4 +1,4 @@
-# => build container
+# ------ build container ------
 FROM node:alpine as react-build
 
 WORKDIR /app
@@ -8,7 +8,7 @@ RUN yarn
 COPY . .
 RUN yarn build
 
-# => run container
+# ------ run container ------
 FROM nginx:alpine
 
 # nginx config
