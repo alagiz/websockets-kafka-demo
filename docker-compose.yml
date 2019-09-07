@@ -19,21 +19,17 @@ services:
     build:
       context: ./client-app
       dockerfile: Dockerfile
-    volumes:
-      - '/usr/src/app/node_modules'
-    command: npm start -p 3000 -b '0.0.0.0'
     ports:
-      - "3100:3000"
+      - "3100:80"
     environment:
       - NODE_ENV=development
-      - REACT_APP_TB_IP=localhost
-      - REACT_APP_GATEWAY_PORT=3102
-    tty: true
+      - BACKEND_IP=localhost
+      - BACKEND_PORT=3102
   authentication:
     build:
       context: ./authentication
       dockerfile: Dockerfile
-    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
     volumes:
       - ./authentication:/authentication
       - type: tmpfs
@@ -44,7 +40,7 @@ services:
     build:
       context: ./gateway
       dockerfile: Dockerfile
-    command: bash -c "bundle exec karafka server --daemon && bundle exec rails s -p 80 -b '0.0.0.0'"
+    command: bash -c "bundle exec karafka server --daemon && bundle exec rails s -e production -p 80 -b '0.0.0.0'"
     volumes:
       - ./gateway:/gateway
       - type: tmpfs
@@ -52,7 +48,6 @@ services:
     environment:
       - AUTHENTICATION_URL=http://authentication:80
       - PERFORMER_URL=http://performer:8080
-      - CLIENT_APP=http://localhost:3100
     depends_on:
       - "kafka"
     ports:

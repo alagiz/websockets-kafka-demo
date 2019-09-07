@@ -2,28 +2,23 @@ version: '3.2'
 services:
   client-app:
     image: websockets-kafka-demo_client-app:latest
-    volumes:
-      - '/usr/src/app/node_modules'
-    command: npm start -p 3000 -b '0.0.0.0'
     ports:
-      - "3100:3000"
+      - "3100:80"
     environment:
       - NODE_ENV=development
-      - REACT_APP_TB_IP=${TB_IP}
-      - REACT_APP_GATEWAY_PORT=3102
-    tty: true
+      - BACKEND_IP=${HOST_IP}
+      - BACKEND_PORT=3102
   authentication:
     image: websockets-kafka-demo_authentication:latest
-    command: bundle exec rails s -p 80 -b '0.0.0.0'
+    command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
     ports:
       - "3101:80"
   gateway:
     image: websockets-kafka-demo_gateway:latest
-    command: bash -c "bundle exec karafka server --daemon && bundle exec rails s -p 80 -b '0.0.0.0'"
+    command: bash -c "bundle exec karafka server --daemon && bundle exec rails s -e production -p 80 -b '0.0.0.0'"
     environment:
       - AUTHENTICATION_URL=http://authentication:80
       - PERFORMER_URL=http://performer:8080
-      - CLIENT_APP=http://${TB_IP}:3100
     ports:
       - "3102:80"
   performer:

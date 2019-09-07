@@ -11,8 +11,8 @@ import CableApp from "../../utils/CableService";
 
 const Auth = new AuthService();
 const Step = Steps.Step;
-const gatewayUrl = `http://${process.env.REACT_APP_TB_IP}:${process.env.REACT_APP_GATEWAY_PORT}`
-// const gatewayUrl = `http://localhost:3102`
+const gatewayUrl = `http://${window._env_.BACKEND_IP}:${window._env_.BACKEND_PORT}`;
+// const gatewayUrl = `http://localhost:3102`;
 
 class App extends Component {
     state = {
@@ -42,29 +42,8 @@ class App extends Component {
     };
 
     componentWillUnmount() {
-        CableApp.cable.subscriptions.remove({channel: 'JobStateNotificationsChannel', id: this.props.user.username}, {
-            received: data => {
-                this.updateJobs(data)
-            }
-        });
-        CableApp.cable.subscriptions.remove({channel: 'AllJobsChannel'}, {
-            received: data => {
-                const jobList = data.jobList;
-
-                this.setState({jobs: isEmpty(jobList) ? [] : jobList});
-            },
-            connected: () => CableApp.cable.subscriptions.subscriptions[1].send({userId: this.props.user.username})
-        });
-    };
-
-    setCurrentJobs = () => {
-        axios.get(`${gatewayUrl}/perform?userId=${this.props.user.username}`)
-            .then(data => {
-                console.log(data)
-
-                this.setState({jobs: isEmpty(data.data) ? [] : data.data})
-            })
-            .catch(e => console.log(e));
+        CableApp.cable.connection.close();
+        CableApp.cable.subscriptions.subscriptions.map(subscription => CableApp.cable.subscriptions.remove(subscription));
     };
 
     updateJobs = data => {
@@ -86,7 +65,7 @@ class App extends Component {
     handleStartComputation = () => CableApp.cable.subscriptions.subscriptions[0].send({userId: this.props.user.username});
 
     handleRemoveAllJobs = () => axios.delete(`${gatewayUrl}/perform/all`)
-        .then(() => this.setCurrentJobs())
+        .then(() => this.setState({jobs: []}))
         .catch(e => console.log(e));
 
     render() {

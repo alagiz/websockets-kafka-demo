@@ -19,8 +19,8 @@ class AuthenticateController < ApplicationController
 
   def get_result(params)
     login = params[:username]
-    password = params[:password]
-    response = authenticate(login, password)
+    # password = params[:password]
+    response = authenticate(login)
 
     handle_response_status(response)
   end
@@ -52,27 +52,15 @@ class AuthenticateController < ApplicationController
     }
   end
 
-  def authenticate(login, password)
-    data = {sf_username: login, sf_password: password}
-
+  def authenticate(login)
     if %w(white-rabbit-guest black-rabbit-guest green-rabbit-guest blue-rabbit-guest red-rabbit-guest rabbit-admin the-unstable-one).include? login
       {
           status: 200,
           username: login
       }
     else
-      conn = Faraday.new(url: Settings.spotfire_server)
-
-      response = conn.post do |req|
-        req.url '/spotfire/sf_security_check'
-        req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.headers['X-Requested-With'] = 'XMLHttpRequest'
-        req.headers['Referer'] = "#{Settings.spotfire_server}/spotfire/login.html"
-        req.body = URI.encode_www_form(data)
-      end
-
       {
-          status: response.status,
+          status: :unauthorized,
           username: login
       }
     end
