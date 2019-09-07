@@ -20,7 +20,7 @@ RUN apk update \
 
 COPY Gemfile* package.json ./
 RUN bundle config --global frozen 1 \
-    && bundle install --path=vendor/bundle \
+    && bundle install --without development:test --path=vendor/bundle \
     # remove unneeded files (cached *.gem, *.o, *.c)
     && rm -rf vendor/bundle/ruby/2.5.0/cache/*.gem \
     && find vendor/bundle/ruby/2.5.0/gems/ -name "*.c" -delete \
