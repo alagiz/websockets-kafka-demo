@@ -1,9 +1,13 @@
 # websockets-kafka-demo
 
 # design
-client-app(react) is connected to gateway through websockets
+* client-app(react) is connected to gateway through websockets
+* gateway and performer communicate through messages in kafka topics
+* gateway and authentication communicate directly through HTTP
 
-gateway and performer communicate through messages in kafka topics
+___
+
+# deployment
 
 deploy with:
 ```$xslt
