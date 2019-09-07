@@ -2,16 +2,12 @@ version: '3.2'
 services:
   client-app:
     image: websockets-kafka-demo_client-app:latest
-    volumes:
-      - '/usr/src/app/node_modules'
-    command: npm start -p 3000 -b '0.0.0.0'
     ports:
-      - "3100:3000"
+      - "3100:80"
     environment:
       - NODE_ENV=development
-      - REACT_APP_TB_IP=${TB_IP}
-      - REACT_APP_GATEWAY_PORT=3102
-    tty: true
+      - BACKEND_IP=${HOST_IP}
+      - BACKEND_PORT=3102
   authentication:
     image: websockets-kafka-demo_authentication:latest
     command: bundle exec rails s -p 80 -b '0.0.0.0'

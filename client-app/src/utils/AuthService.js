@@ -8,7 +8,7 @@ export default class AuthService {
 
   login = (username, password) => {
     // const apiGateway = `http://localhost:3102`;
-    const apiGateway = `http://${process.env.REACT_APP_TB_IP}:${process.env.REACT_APP_GATEWAY_PORT}`;
+    const apiGateway = `http://${window._env_.BACKEND_IP}:${window._env_.BACKEND_PORT}`;
 
     // Get a token
     return this.fetch(`${apiGateway}/authenticate`, {

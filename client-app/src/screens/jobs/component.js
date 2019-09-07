@@ -11,8 +11,8 @@ import CableApp from "../../utils/CableService";
 
 const Auth = new AuthService();
 const Step = Steps.Step;
-const gatewayUrl = `http://${process.env.REACT_APP_TB_IP}:${process.env.REACT_APP_GATEWAY_PORT}`
-// const gatewayUrl = `http://localhost:3102`
+const gatewayUrl = `http://${window._env_.BACKEND_IP}:${window._env_.BACKEND_PORT}`;
+// const gatewayUrl = `http://localhost:3102`;
 
 class App extends Component {
     state = {

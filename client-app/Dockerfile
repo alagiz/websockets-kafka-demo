@@ -1,12 +1,36 @@
-FROM node:9.6.1
+# => build container
+FROM node:alpine as react-build
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-COPY /public /usr/src/app/public
-COPY /src /usr/src/app/src
+WORKDIR /app
+COPY package.json .
+COPY package-lock.json .
+RUN yarn
+COPY . .
+RUN yarn build
 
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+# => run container
+FROM nginx:alpine
 
-COPY package.json /usr/src/app/package.json
+# nginx config
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
 
-RUN npm install --silent
+# static build
+COPY --from=react-build /app/build /usr/share/nginx/html
+
+# default port exposure
+EXPOSE 80
+
+# initialize environment variables into filesystem
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .
+COPY .env .
+
+# add bash
+RUN apk add --no-cache bash
+
+# run script which initializes env vars to fs
+RUN chmod +x env.sh
+
+# start Nginx server
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
