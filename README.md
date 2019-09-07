@@ -2,6 +2,7 @@
 
 # design
 client-app(react) is connected to gateway through websockets
+
 gateway and performer communicate through messages in kafka topics
 
 deploy with:
