@@ -9,7 +9,8 @@ ___
 
 # deployment
 
-deploy with:
+deploy to Docker Swarm cluster with:
+
 ```$xslt
  env TB_IP=172.19.234.73 docker stack deploy -c docker-compose.depl.yml wsStackk
 ```
