@@ -2,12 +2,18 @@ version: '3.2'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
     ports:
       - "2181:2181"
   kafka:
     image: wurstmeister/kafka
-    ports:
-      - "9092:9092"
     depends_on:
       - "zookeeper"
     environment:
@@ -17,17 +23,43 @@ services:
       KAFKA_HEAP_OPTS: -Xmx1024m -Xms1024m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      resources:
+        limits:
+          cpus: '0.7'
+          memory: 300M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
+    ports:
+      - "9092:9092"
   client-app:
     image: websockets-kafka-demo_client-app:latest
-    ports:
-      - "3100:80"
     environment:
       - NODE_ENV=development
       - BACKEND_IP=${HOST_IP}
       - BACKEND_PORT=3102
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 50M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
+    ports:
+      - "3100:80"
   authentication:
     image: websockets-kafka-demo_authentication:latest
     command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
     ports:
       - "3101:80"
   gateway:
@@ -36,6 +68,14 @@ services:
     environment:
       - AUTHENTICATION_URL=http://authentication:80
       - PERFORMER_URL=http://performer:8080
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
     ports:
       - "3102:80"
   performer:
@@ -44,6 +84,14 @@ services:
     environment:
       - GATEWAY_URL=http://gateway:80
     command: ["java",  "-jar", "/app.jar"]
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
     ports:
       - "3103:8080"
 
