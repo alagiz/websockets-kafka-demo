@@ -10,14 +10,14 @@
   ```
 * in **/etc/httpd/conf/httpd.conf** append to the bottom:
   ```
-  ProxyPass /ws http://lana-web-appl-int:3100/
-  ProxyPassReverse /ws http://lana-web-appl-int:3100/
+  ProxyPass /ws http://<host-name>:3100/
+  ProxyPassReverse /ws http://<host-name>:3100/
 
-  ProxyPass /ws-gateway-http http://lana-web-appl-int:3102/
-  ProxyPassReverse /ws-gateway-http http://lana-web-appl-int:3102/
+  ProxyPass /ws-gateway-http http://<host-name>:3102/
+  ProxyPassReverse /ws-gateway-http http://<host-name>:3102/
 
-  ProxyPass /ws-gateway-ws ws://lana-web-appl-int:3102/
-  ProxyPassReverse /ws-gateway-ws ws://lana-web-appl-int:3102/
+  ProxyPass /ws-gateway-ws ws://<host-name>:3102/
+  ProxyPassReverse /ws-gateway-ws ws://<host-name>:3102/
   ```
 * restart httpd service:
   ```
