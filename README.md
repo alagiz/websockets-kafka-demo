@@ -9,11 +9,11 @@ ___
 
 # deployment
 
-deploy to Docker Swarm cluster with:
-
-```$xslt
- env TB_IP=172.19.234.73 docker stack deploy -c docker-compose.depl.yml wsStackk
-```
+* make sure to enable proxy_wstunnel_module (instructions are in httpd service)
+* deploy to Docker Swarm cluster with:
+  ```$xslt
+   env HOST_IP=172.19.235.31 docker stack deploy -c docker-compose.depl.yml wsStackk
+  ```
 
 ___
 
