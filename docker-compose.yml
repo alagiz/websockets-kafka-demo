@@ -63,4 +63,10 @@ services:
     command: ["java",  "-jar", "/app.jar"]
     ports:
       - "3103:8080"
+  httpd:
+    build:
+      context: ./httpd
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
 
