@@ -36,9 +36,6 @@ services:
   client-app:
     image: websockets-kafka-demo_client-app:latest
     environment:
-      - NODE_ENV=development
-      - BACKEND_IP=${HOST_IP}
-
       - BACKEND_URL_HTTP=${HOST_IP}:8080/ws-gateway-http
       - BACKEND_URL_WS=${HOST_IP}:8080/ws-gateway-ws
       - BACKEND_IP=${HOST_IP}:8080
