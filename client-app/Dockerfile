@@ -31,6 +31,3 @@ RUN apk add --no-cache bash
 
 # run script which initializes env vars to fs
 RUN chmod +x env.sh
-
-# start Nginx server
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]

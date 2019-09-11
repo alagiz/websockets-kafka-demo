@@ -38,7 +38,10 @@ services:
     environment:
       - NODE_ENV=development
       - BACKEND_IP=${HOST_IP}
-      - BACKEND_PORT=3102
+
+      - BACKEND_URL_HTTP=${HOST_IP}:8080/ws-gateway-http
+      - BACKEND_URL_WS=${HOST_IP}:8080/ws-gateway-ws
+      - BACKEND_IP=${HOST_IP}:8080
     deploy:
       resources:
         limits:
@@ -47,6 +50,7 @@ services:
         reservations:
           cpus: '0.1'
           memory: 10M
+    command: bash -c "/usr/share/nginx/html/env.sh && envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
     ports:
       - "3100:80"
   authentication:

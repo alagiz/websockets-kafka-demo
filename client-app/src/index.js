@@ -7,7 +7,7 @@ import DataSelection from './screens/jobs/component';
 import Login from './screens/login/component';
 
 ReactDOM.render(
-    <Router>
+    <Router basename="/ws">
         <div className="container">
             <Route exact path="/" component={DataSelection}/>
             <Route exact path="/login" component={Login}/>
