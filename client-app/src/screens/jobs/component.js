@@ -64,7 +64,7 @@ class App extends Component {
 
     handleStartComputation = () => CableApp.cable.subscriptions.subscriptions[0].send({userId: this.props.user.username});
 
-    handleRemoveAllJobs = () => axios.delete(`${gatewayUrl}/perform/all`)
+    handleRemoveAllJobs = () => axios.delete(`${gatewayUrl}/perform/all`, {headers: {Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => this.setState({jobs: []}))
         .catch(e => console.log(e));
 
