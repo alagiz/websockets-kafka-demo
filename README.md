@@ -1,5 +1,7 @@
 # websockets-kafka-demo
 
+[aws-deployed-version](http://3.13.90.180/ws/)
+
 # design
 * client-app(react) is connected to gateway through websockets
 * gateway and performer communicate through messages in kafka topics
@@ -12,7 +14,7 @@ ___
 * make sure to enable proxy_wstunnel_module (instructions are in httpd service)
 * deploy to Docker Swarm cluster with:
   ```$xslt
-   env HOST_IP=172.19.235.31 docker stack deploy -c docker-compose.depl.yml wsStackk
+   env HOST_IP=3.13.90.180 docker stack deploy -c docker-compose.depl.yml wsStackk
   ```
 
 ___
@@ -23,7 +25,7 @@ ___
    ```
    docker-compose up
    ```
-* visit http://localhost:3100
+* visit http://localhost:8080/ws
 * authenticate with passwordless usernames:
    ```
    white-rabbit-guest
