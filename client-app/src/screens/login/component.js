@@ -3,11 +3,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faExclamationTriangle} from '@fortawesome/fontawesome-free-solid';
 import './style.css';
 
-import whiteRabbit from '../../white_hare.png';
+import worker from '../../worker.png';
 import AuthService from '../../utils/AuthService';
 
 class Login extends Component {
-  state = {showUnauthorizedWarning: false}
+  state = {showUnauthorizedWarning: false};
 
   constructor(props) {
     super(props);
@@ -34,9 +34,9 @@ class Login extends Component {
       .catch(() => {
         this.setState({showUnauthorizedWarning: true});
       })
-  }
+  };
 
-  handleChange = event => this.setState({[event.target.name]: event.target.value})
+  handleChange = event => this.setState({[event.target.name]: event.target.value});
 
   unauthorizedWarningComponent =
     <div className="unauthorized-warning">
@@ -53,13 +53,13 @@ class Login extends Component {
         <div className="login-card">
           <div className="login-card-left-side">
             <div className="login-card-left-side-icon">
-              <img src={whiteRabbit} className="rabbit-icon"/>
+              <img src={worker} alt="worker" className="worker-icon"/>
             </div>
             <div className="login-card-left-side-title">
-              White rabbit
+              Asynchronous workers
             </div>
             <div className="login-card-left-side-version">
-              version: 0.1
+              version: 1.0
             </div>
           </div>
           <div className="login-card-right-side">

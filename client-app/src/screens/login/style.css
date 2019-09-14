@@ -7,10 +7,9 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
-    background: url(../../lis_background.jpg);
+    background: url(../../background.png);
 }
 
 .unauthorized-warning {
@@ -40,7 +39,7 @@
     margin-bottom: 10px;
 }
 
-.rabbit-icon {
+.worker-icon {
     width: 56px;
 }
 
