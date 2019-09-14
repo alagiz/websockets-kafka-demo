@@ -20,7 +20,7 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ADVERTISED_PORT: "9092"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_HEAP_OPTS: -Xmx1024m -Xms1024m
+      KAFKA_HEAP_OPTS: -Xmx256m -Xms256m
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
@@ -73,7 +73,7 @@ services:
       resources:
         limits:
           cpus: '0.5'
-          memory: 100M
+          memory: 300M
         reservations:
           cpus: '0.1'
           memory: 10M
