@@ -10,9 +10,9 @@ class NotifyJobStatusController < ApplicationController
         time_stamp: Time.now.to_s
     )
 
-    if job[:userId] != "rabbit-admin"
+    if job[:userId] != "godfather"
       ActionCable.server.broadcast(
-          "job_state_notification_channel_rabbit-admin",
+          "job_state_notification_channel_godfather",
           job: job,
           time_stamp: Time.now.to_s
       )
