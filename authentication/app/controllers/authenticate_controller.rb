@@ -53,7 +53,7 @@ class AuthenticateController < ApplicationController
   end
 
   def authenticate(login)
-    if %w(white-rabbit-guest black-rabbit-guest green-rabbit-guest blue-rabbit-guest red-rabbit-guest rabbit-admin the-unstable-one).include? login
+    if %w(white-collar black-collar green-collar blue-collar red-collar godfather the-unstable-one).include? login
       {
           status: 200,
           username: login

@@ -47,8 +47,8 @@ class App extends Component {
     };
 
     updateJobs = data => {
-        console.log("received data through ws!")
-        console.log(data)
+        console.log("received data through ws!");
+        console.log(data);
         const jobs = this.state.jobs;
         const updatedJob = data.job;
         const foundIndex = jobs.findIndex(job => job.jobId === updatedJob.jobId);
@@ -72,9 +72,9 @@ class App extends Component {
         const serverError = this.state.serverError ?
             <div
                 className="server-error">{this.state.serverError}</div> : '';
-        const waitingState = {state: 'wait', icon: 'pause-circle', iconColor: 'grey'}
-        const processingState = {state: 'process', icon: 'clock-circle', iconColor: 'orange'}
-        const finishedState = {state: 'finish', icon: 'check-circle', iconColor: '#1890FF'}
+        const waitingState = {state: 'wait', icon: 'pause-circle', iconColor: 'grey'};
+        const processingState = {state: 'process', icon: 'clock-circle', iconColor: 'orange'};
+        const finishedState = {state: 'finish', icon: 'check-circle', iconColor: '#1890FF'};
 
         const steps = item => range(0, 7).map((stepNumber, i) => {
             const job = item;
@@ -117,7 +117,7 @@ class App extends Component {
                 </div>
             </Row>;
 
-        const adminButton = this.props.user.username === 'rabbit-admin' ?
+        const adminButton = this.props.user.username === 'godfather' ?
             <button type="button" className="form-submit" onClick={this.handleRemoveAllJobs.bind(this)}>
                 Remove all jobs
             </button> : '';

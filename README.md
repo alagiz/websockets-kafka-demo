@@ -28,9 +28,9 @@ ___
 * visit http://localhost:8080/ws
 * authenticate with passwordless usernames:
    ```
-   white-rabbit-guest
-   red-rabbit-guest
-   blue-rabbit-guest
-   black-rabbit-guest
-   rabbit-admin #to see all jobs from all users
+   white-collar
+   black-collar
+   red-collar
+   blue-collar
+   godfather => to see all jobs from all collars
    ```

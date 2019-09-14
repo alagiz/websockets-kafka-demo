@@ -30,7 +30,7 @@ public class JobStorage {
     }
 
     public List<Job> getJobsByUserId(String userId) {
-        if (userId.equals("rabbit-admin")) {
+        if (userId.equals("godfather")) {
             return jobMap.values().stream()
                     .flatMap(List::stream)
                     .collect(Collectors.toList());

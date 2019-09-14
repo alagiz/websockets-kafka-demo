@@ -10,7 +10,7 @@ class NotifyJobsController < ApplicationController
         time_stamp: Time.now.to_s
     )
 
-    if job[:userId] != "rabbit-admin"
+    if job[:userId] != "godfather"
       ActionCable.server.broadcast(
           "all_jobs_channel",
           jobList: job[:jobList],
