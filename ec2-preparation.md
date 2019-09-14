@@ -1,4 +1,4 @@
-# EC2 Amazon-linux instance preparation 
+# ec2 amazon-linux instance preparation 
 
 * install git 
   ```
