@@ -25,7 +25,7 @@ ___
    ```
    docker-compose up
    ```
-* visit http://localhost:3100
+* visit http://localhost:8080/ws
 * authenticate with passwordless usernames:
    ```
    white-rabbit-guest
