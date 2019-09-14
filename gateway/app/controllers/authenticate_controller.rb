@@ -29,14 +29,4 @@ class AuthenticateController < ApplicationController
 
     json_response(response.body, response.status)
   end
-
-  def stale
-    puts "sdf"
-    time = 60
-    time_start = Time.now
-    begin
-      time_running = Time.now - time_start
-      puts "dfgdfg"
-    end until (time_running.to_i >= time)
-  end
 end
