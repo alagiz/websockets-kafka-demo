@@ -14,7 +14,7 @@ ___
 * make sure to enable proxy_wstunnel_module (instructions are in httpd service)
 * deploy to Docker Swarm cluster with:
   ```$xslt
-   env HOST_IP=172.19.235.31 docker stack deploy -c docker-compose.depl.yml wsStackk
+   env HOST_IP=3.13.90.180 docker stack deploy -c docker-compose.depl.yml wsStackk
   ```
 
 ___
