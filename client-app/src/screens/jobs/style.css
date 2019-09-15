@@ -75,7 +75,7 @@
 body {
     background: white;
     overflow: hidden;
-    height: calc(100vh - 0.5em);
+    height: 100%;
 }
 
 .forma-submit {
