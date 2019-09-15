@@ -12,7 +12,7 @@
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: space-between;
-    background-color: #3B3E43;
+    background-color: #272C2F;
     height: 3em;
     padding-left: 10px;
     color: white;
@@ -20,12 +20,6 @@
 
 .header-welcome {
     align-self: center;
-    padding-left: 0.5em;
-}
-
-.header-welcome > .forma {
-    align-self: center;
-    background: #3B3E43 !important;
     padding-left: 0.5em;
 }
 
@@ -110,7 +104,7 @@ body {
 .logout-button {
     align-self: center;
     margin: 0 !important;
-    background-color: #3B3E43 !important;
+    background-color: #272C2F !important;
 }
 
 @keyframes blink {

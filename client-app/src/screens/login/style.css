@@ -123,7 +123,7 @@
     height: 2.5em;
     width: 10em;
     color: #fff;
-    background-color: #3B3E43;
+    background-color: #272C2F;
     border: none;
     transition: 0.3s opacity ease;
     cursor: pointer;
@@ -131,7 +131,7 @@
 }
 
 .form-submit:hover {
-    background-color: #535356;
+    background-color: #3B3E43;
 }
 
 input::placeholder {
@@ -139,7 +139,7 @@ input::placeholder {
 }
 
 .form-submit:focus {
-    background-color: #272C2F;
+    background-color: #202426;
 }
 
 .form-button {
