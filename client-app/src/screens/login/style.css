@@ -13,7 +13,7 @@
 }
 
 .unauthorized-warning {
-    color: #0D6381;
+    color: #FAA816;
     font-size: 15px;
     font-weight: bold;
     height: 20px;
@@ -123,7 +123,7 @@
     height: 2.5em;
     width: 10em;
     color: #fff;
-    background-color: #1D2326;
+    background-color: #3B3E43;
     border: none;
     transition: 0.3s opacity ease;
     cursor: pointer;
@@ -139,7 +139,7 @@ input::placeholder {
 }
 
 .form-submit:focus {
-    background-color: #183844;
+    background-color: #272C2F;
 }
 
 .form-button {
