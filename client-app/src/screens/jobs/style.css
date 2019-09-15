@@ -78,22 +78,6 @@ body {
     height: 100%;
 }
 
-.forma-submit {
-    display: flex;
-    -ms-flex-pack: center;
-    justify-content: center;
-    height: 2.5em;
-    width: 10em;
-    color: #fff;
-    background-color: #374F7D;
-    border: none;
-    -webkit-transition: 0.3s opacity ease;
-    -o-transition: 0.3s opacity ease;
-    transition: 0.3s opacity ease;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
 .hidden {
     display: none;
 }
@@ -206,8 +190,6 @@ body {
 }
 
 .ant-btn-primary:hover, .ant-btn-primary:focus {
-    background-color: #183844;
-    border-color: #183844;
     outline: none;
 }
 
