@@ -75,7 +75,7 @@
 body {
     background: white;
     overflow: hidden;
-    height: calc(100vh - 0.5em);
+    height: 100%;
 }
 
 .forma-submit {
@@ -219,7 +219,7 @@ button:focus, input:focus {
     padding-left: 20px !important;
 }
 
-.ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after {
+.ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after, .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title:after {
     background-color: #5CC8FF !important;
 }
 
