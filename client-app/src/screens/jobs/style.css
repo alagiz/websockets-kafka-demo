@@ -132,44 +132,8 @@ body {
     animation: blink .5s step-end infinite alternate;
 }
 
-.to-computation-manager-button {
-    margin-left: 9px;
-}
-
 .ant-switch {
     width: 121px;
-}
-
-.job-run {
-    display: flex;
-    flex-direction: column;
-    width: 99%;
-    margin: 0.3em;
-    padding: 0.4em;
-    border-style: groove;
-}
-
-.job-list-container {
-    display: flex;
-    flex-direction: column;
-    width: 99%;
-    margin: 0.5em;
-}
-
-.job-info {
-    display: flex;
-    margin-bottom: 0.5em;
-    color: white;
-}
-
-.job-info-label:first-of-type {
-    margin: 0 0.3em 0 0;
-}
-
-.job-info-label {
-    color: white;
-    font-weight: bold;
-    margin: 0 0.3em 0 1em;
 }
 
 .ant-steps-item-title {
