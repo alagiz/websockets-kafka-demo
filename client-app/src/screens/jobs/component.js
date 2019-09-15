@@ -73,7 +73,7 @@ class App extends Component {
             <div
                 className="server-error">{this.state.serverError}</div> : '';
         const waitingState = {state: 'wait', icon: 'pause-circle', iconColor: 'grey'};
-        const processingState = {state: 'process', icon: 'clock-circle', iconColor: 'orange'};
+        const processingState = {state: 'process', icon: 'clock-circle', iconColor: '#FFBA08'};
         const finishedState = {state: 'finish', icon: 'check-circle', iconColor: '#1890FF'};
 
         const steps = item => range(0, 7).map((stepNumber, i) => {
@@ -101,7 +101,7 @@ class App extends Component {
                             <div className="strategy">
                                 <div className="strategy-info">
                                     <div className="strategy-info-label">Status:</div>
-                                    {item.isJobDone ? "Finished" : `At step ${item.jobStep}`}
+                                    {item.isJobDone ? "Finished" : `at step ${item.jobStep}`}
                                     <div className="strategy-info-label">Triggered by:</div>
                                     {item.userId}
                                     <div className="strategy-info-label">Job id:</div>
@@ -143,7 +143,7 @@ class App extends Component {
                 <div className="footer">
                     {adminButton}
                     <button type="button" className="form-submit" onClick={this.handleStartComputation.bind(this)}>
-                        Start a Job of 7 steps
+                        Start job of 7 steps
                     </button>
                 </div>
             </div>
