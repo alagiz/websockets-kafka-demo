@@ -72,9 +72,9 @@ class App extends Component {
         const serverError = this.state.serverError ?
             <div
                 className="server-error">{this.state.serverError}</div> : '';
-        const waitingState = {state: 'wait', icon: 'pause-circle', iconColor: 'grey'};
-        const processingState = {state: 'process', icon: 'clock-circle', iconColor: '#FFBA08'};
-        const finishedState = {state: 'finish', icon: 'check-circle', iconColor: '#1890FF'};
+        const waitingState = {state: 'wait', icon: 'pause-circle', className: 'waiting-state'};
+        const processingState = {state: 'process', icon: 'clock-circle', className: 'processing-state'};
+        const finishedState = {state: 'finish', icon: 'check-circle', className: 'finished-state'};
 
         const steps = item => range(0, 7).map((stepNumber, i) => {
             const job = item;
@@ -88,23 +88,23 @@ class App extends Component {
             if (isJobDone) state = finishedState;
 
             return <Step key={i} status={state.state} title={`Step ${stepNumber}`}
-                         icon={<Icon type={state.icon} theme="twoTone" twoToneColor={state.iconColor}/>}/>
+                         icon={<Icon type={state.icon} theme="filled" className={state.className}/>}/>
         });
 
         const josSteps = isEmpty(this.state.jobs) ? '' :
             <Row>
-                <div className="strategy-list-item-container">
+                <div className="job-list-container">
                     <List
                         itemLayout="horizontal"
                         dataSource={this.state.jobs}
                         renderItem={item => (
-                            <div className="strategy">
-                                <div className="strategy-info">
-                                    <div className="strategy-info-label">Status:</div>
+                            <div className="job-run">
+                                <div className="job-info">
+                                    <div className="job-info-label">Status:</div>
                                     {item.isJobDone ? "Finished" : `at step ${item.jobStep}`}
-                                    <div className="strategy-info-label">Triggered by:</div>
+                                    <div className="job-info-label">Triggered by:</div>
                                     {item.userId}
-                                    <div className="strategy-info-label">Job id:</div>
+                                    <div className="job-info-label">Job id:</div>
                                     {item.jobId}
                                 </div>
                                 <Steps>
