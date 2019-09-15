@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    background: #6F6E6E;
 }
 
 .App-logo {
@@ -109,6 +110,7 @@ body {
     display: flex;
     justify-content: flex-end;
     padding: 10px;
+    background: #6F6E6E;
 }
 
 .footer > button {
@@ -154,7 +156,7 @@ body {
     width: 121px;
 }
 
-.strategy {
+.job-run {
     display: flex;
     flex-direction: column;
     width: 99%;
@@ -163,39 +165,32 @@ body {
     border-style: groove;
 }
 
-.strategy-list-item-container {
+.job-list-container {
     display: flex;
     flex-direction: column;
     width: 99%;
     margin: 0.5em;
 }
 
-.strategy-info {
+.job-info {
     display: flex;
     margin-bottom: 0.5em;
+    color: white;
 }
 
-.strategy-info-label:first-of-type {
+.job-info-label:first-of-type {
     margin: 0 0.3em 0 0;
 }
 
-.shadowmode-info {
-    display: flex;
-    flex-direction: row;
-}
-
-.shadowmode-info-label {
-    font-weight: bold;
-    margin: 0 0.3em 0 0;
-}
-
-.strategy-info-label {
+.job-info-label {
+    color: white;
     font-weight: bold;
     margin: 0 0.3em 0 1em;
 }
 
 .ant-steps-item-title {
     min-width: 120px !important;
+    color: white !important;
 }
 
 .ant-layout-footer {
@@ -225,11 +220,11 @@ button:focus, input:focus {
 }
 
 .ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after {
-    background-color: #1890FF !important;
+    background-color: #5CC8FF !important;
 }
 
 .ant-steps-item-title:after {
-    height: 2px !important;
+    height: 1px !important;
     left: 92% !important;
 }
 
@@ -242,4 +237,16 @@ button:focus, input:focus {
 .ant-steps-item-title {
     padding-right: 0 !important;
     min-width: 90px !important;
+}
+
+.waiting-state {
+    color: #C0C0C0;
+}
+
+.processing-state {
+    color: #FFBA08;
+}
+
+.finished-state {
+    color: #5CC8FF;
 }
