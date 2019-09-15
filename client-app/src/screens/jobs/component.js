@@ -5,6 +5,7 @@ import axios from "axios";
 import "./style.css";
 import "antd/dist/antd.css";
 
+import JobRun from "./components/job-run/component";
 import AuthService from "../../utils/AuthService";
 import withAuth from "../../utils/withAuth";
 import CableApp from "../../utils/CableService";
@@ -12,6 +13,7 @@ import CableApp from "../../utils/CableService";
 const Auth = new AuthService();
 const Step = Steps.Step;
 const gatewayUrl = `http://${window._env_.BACKEND_URL_HTTP}`;
+
 // const gatewayUrl = `http://localhost:3102`;
 
 class App extends Component {
@@ -69,9 +71,7 @@ class App extends Component {
         .catch(e => console.log(e));
 
     render() {
-        const serverError = this.state.serverError ?
-            <div
-                className="server-error">{this.state.serverError}</div> : '';
+        const serverError = this.state.serverError ? <div className="server-error">{this.state.serverError}</div> : '';
         const waitingState = {state: 'wait', icon: 'pause-circle', className: 'waiting-state'};
         const processingState = {state: 'process', icon: 'clock-circle', className: 'processing-state'};
         const finishedState = {state: 'finish', icon: 'check-circle', className: 'finished-state'};
@@ -98,22 +98,9 @@ class App extends Component {
                         itemLayout="horizontal"
                         dataSource={this.state.jobs}
                         renderItem={item => (
-                            <div className="job-run">
-                                <div className="job-info">
-                                    <div className="job-info-label">Status:</div>
-                                    {item.isJobDone ? "Finished" : `at step ${item.jobStep}`}
-                                    <div className="job-info-label">Triggered by:</div>
-                                    {item.userId}
-                                    <div className="job-info-label">Job id:</div>
-                                    {item.jobId}
-                                </div>
-                                <Steps>
-                                    {steps(item)}
-                                </Steps>
-                            </div>
+                            <JobRun steps={steps} item={item}/>
                         )}
                     />
-
                 </div>
             </Row>;
 

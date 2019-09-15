@@ -7,98 +7,98 @@ import worker from '../../worker.png';
 import AuthService from '../../utils/AuthService';
 
 class Login extends Component {
-  state = {showUnauthorizedWarning: false};
+    state = {showUnauthorizedWarning: false};
 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.Auth = new AuthService();
-  }
-
-  componentWillMount() {
-    if (this.Auth.isLoggedIn()) {
-      this.props.history.replace('/');
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.Auth = new AuthService();
     }
-  }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
+    componentWillMount() {
+        if (this.Auth.isLoggedIn()) {
+            this.props.history.replace('/');
+        }
+    }
 
-    this.Auth.login(this.state.username, this.state.password)
-      .then(() => {
-        this.setState({showUnauthorizedWarning: false});
-        this.props.history.replace('/');
-      })
-      .catch(() => {
-        this.setState({showUnauthorizedWarning: true});
-      })
-  };
+    handleFormSubmit = event => {
+        event.preventDefault();
 
-  handleChange = event => this.setState({[event.target.name]: event.target.value});
+        this.Auth.login(this.state.username, this.state.password)
+            .then(() => {
+                this.setState({showUnauthorizedWarning: false});
+                this.props.history.replace('/');
+            })
+            .catch(() => {
+                this.setState({showUnauthorizedWarning: true});
+            })
+    };
 
-  unauthorizedWarningComponent =
-    <div className="unauthorized-warning">
-      <FontAwesomeIcon icon={faExclamationTriangle} size="1x" className="unauthorized-warning-icon"/>
-      Wrong username or password
-    </div>;
+    handleChange = event => this.setState({[event.target.name]: event.target.value});
 
-  render() {
-    const optionalComponent = this.state.showUnauthorizedWarning ? this.unauthorizedWarningComponent :
-      <div className="unauthorized-warning"/>;
+    unauthorizedWarningComponent =
+        <div className="unauthorized-warning">
+            <FontAwesomeIcon icon={faExclamationTriangle} size="1x" className="unauthorized-warning-icon"/>
+            Wrong username or password
+        </div>;
 
-    return (
-      <div className="center">
-        <div className="login-card">
-          <div className="login-card-left-side">
-            <div className="login-card-left-side-icon">
-              <img src={worker} alt="worker" className="worker-icon"/>
+    render() {
+        const optionalComponent = this.state.showUnauthorizedWarning ? this.unauthorizedWarningComponent :
+            <div className="unauthorized-warning"/>;
+
+        return (
+            <div className="center">
+                <div className="login-card">
+                    <div className="login-card-left-side">
+                        <div className="login-card-left-side-icon">
+                            <img src={worker} alt="worker" className="worker-icon"/>
+                        </div>
+                        <div className="login-card-left-side-title">
+                            Asynchronous workers
+                        </div>
+                        <div className="login-card-left-side-version">
+                            version: 1.0
+                        </div>
+                    </div>
+                    <div className="login-card-right-side">
+                        <div className="login-card-right-side-container">
+                            <div className="login-card-right-side-title">Login</div>
+                            <div className="login-card-right-side-form">
+                                <form onSubmit={this.handleFormSubmit}>
+                                    <div className="form-label">Username</div>
+                                    <input
+                                        className="form-item"
+                                        placeholder="Type in your username..."
+                                        name="username"
+                                        type="text"
+                                        onChange={this.handleChange}
+                                    />
+                                    <div className="form-label">Password</div>
+                                    <input
+                                        className="form-item"
+                                        placeholder="Type in your password..."
+                                        name="password"
+                                        type="password"
+                                        onChange={this.handleChange}
+                                    />
+                                    {optionalComponent}
+                                    <div className="form-button">
+                                        <input
+                                            className="form-submit"
+                                            value="Log in"
+                                            type="submit"
+                                        />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="login-card-left-side-title">
-              Asynchronous workers
-            </div>
-            <div className="login-card-left-side-version">
-              version: 1.0
-            </div>
-          </div>
-          <div className="login-card-right-side">
-            <div className="login-card-right-side-container">
-              <div className="login-card-right-side-title">Login</div>
-              <div className="login-card-right-side-form">
-                <form onSubmit={this.handleFormSubmit}>
-                  <div className="form-label">Username</div>
-                  <input
-                    className="form-item"
-                    placeholder="Type in your username..."
-                    name="username"
-                    type="text"
-                    onChange={this.handleChange}
-                  />
-                  <div className="form-label">Password</div>
-                  <input
-                    className="form-item"
-                    placeholder="Type in your password..."
-                    name="password"
-                    type="password"
-                    onChange={this.handleChange}
-                  />
-                  {optionalComponent}
-                  <div className="form-button">
-                    <input
-                      className="form-submit"
-                      value="Log in"
-                      type="submit"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default Login;
