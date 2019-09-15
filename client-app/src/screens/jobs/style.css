@@ -11,7 +11,7 @@
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: space-between;
-    background-color: #374F7D;
+    background-color: #3B3E43;
     height: 3em;
     padding-left: 10px;
     color: white;
@@ -24,7 +24,7 @@
 
 .header-welcome > .forma {
     align-self: center;
-    background: #374F7D !important;
+    background: #3B3E43 !important;
     padding-left: 0.5em;
 }
 
@@ -124,12 +124,12 @@ body {
 .logout-button {
     align-self: center;
     margin: 0 !important;
-    background-color: #374F7D !important;
+    background-color: #3B3E43 !important;
 }
 
 @keyframes blink {
     50% {
-        border-color: #FF7F45;
+        border-color: #183844;
     }
 }
 
@@ -139,10 +139,10 @@ body {
     flex-direction: column;
     text-align: center;
     vertical-align: middle;
-    border: 2px solid #374F7D;
+    border: 2px solid #3B3E43;
     padding-left: 5px;
     padding-right: 5px;
-    color: #FF7F45;
+    color: #183844;
     animation: blink .5s step-end infinite alternate;
 }
 
@@ -207,10 +207,39 @@ body {
 }
 
 .ant-btn-primary {
-    border-color: #1E3055;
+    border-color: #183844;
 }
 
 .ant-btn-primary:hover, .ant-btn-primary:focus {
-    background-color: #1E3055;
-    border-color: #1E3055;
+    background-color: #183844;
+    border-color: #183844;
+    outline: none;
+}
+
+button:focus, input:focus {
+    outline: none;
+}
+
+.ant-steps {
+    padding-left: 20px !important;
+}
+
+.ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after {
+    background-color: #1890FF !important;
+}
+
+.ant-steps-item-title:after {
+    height: 2px !important;
+    left: 92% !important;
+}
+
+.ant-steps-item {
+    display: flex !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+.ant-steps-item-title {
+    padding-right: 0 !important;
+    min-width: 90px !important;
 }
