@@ -1,10 +1,12 @@
 .job-run {
     display: flex;
     flex-direction: column;
-    width: 99%;
-    margin: 0.3em;
-    padding: 0.4em;
+    width: 100%;
+    margin: 3px 0 10px 0;
+    padding: 8px 10px 5px 10px;
+    border-width: 0;
     border-style: groove;
+    background: #3B3E43;
 }
 
 .job-list-container {
