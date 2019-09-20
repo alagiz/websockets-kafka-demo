@@ -20,12 +20,12 @@ services:
       context: ./client-app
       dockerfile: Dockerfile
     environment:
-      - BACKEND_URL_HTTP=localhost:8080/ws-gateway-http
-      - BACKEND_URL_WS=localhost:8080/ws-gateway-ws
+      - BACKEND_URL_HTTP=https://localhost:8080/ws-gateway-http
+      - BACKEND_URL_WS=wss://localhost:8080/ws-gateway-ws/cable
       - BACKEND_IP=localhost:8080
     command: bash -c "/usr/share/nginx/html/env.sh && envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
     ports:
-      - "3100:80"
+      - "3100:443"
   authentication:
     build:
       context: ./authentication
@@ -51,8 +51,6 @@ services:
       - PERFORMER_URL=http://performer:8080
     depends_on:
       - "kafka"
-    ports:
-      - "3102:80"
   performer:
     build:
       context: ./performer
@@ -68,5 +66,17 @@ services:
       context: ./httpd
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8080:443"
+  gateway-nginx:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile.nginx
+    depends_on:
+      - gateway
+    ports:
+      - 443:443
+    environment:
+      - BACKEND_IP=gateway:80
+    command: bash -c "envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
+    restart: always
 

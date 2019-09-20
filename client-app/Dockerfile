@@ -17,9 +17,10 @@ COPY conf /etc/nginx
 
 # static build
 COPY --from=react-build /app/build /usr/share/nginx/html
+COPY ssl_certificates/* /usr/local/apache2/conf/
 
 # default port exposure
-EXPOSE 80
+EXPOSE 443
 
 # initialize environment variables into filesystem
 WORKDIR /usr/share/nginx/html
