@@ -12,7 +12,7 @@ import CableApp from "../../utils/CableService";
 
 const Auth = new AuthService();
 const Step = Steps.Step;
-const gatewayUrl = `http://${window._env_.BACKEND_URL_HTTP}`;
+const gatewayUrl = `${window._env_.BACKEND_URL_HTTP}`;
 // const gatewayUrl = `http://localhost:3102`;
 
 class App extends Component {
