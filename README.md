@@ -1,6 +1,6 @@
 # websockets-kafka-demo
 
-[aws-deployed-version](http://3.13.90.180/ws/)
+[aws-deployed-version](http://3.13.90.180/ws/) \<not available at the moment, but there is this, though => http://3.13.90.180/instability \>
 
 # design
 * client-app(react) is connected to gateway through websockets
