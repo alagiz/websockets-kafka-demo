@@ -24,8 +24,6 @@ services:
       - BACKEND_URL_WS=wss://localhost:8080/ws-gateway-ws/cable
       - BACKEND_IP=localhost:8080
     command: bash -c "/usr/share/nginx/html/env.sh && envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
-    ports:
-      - "3100:443"
   authentication:
     build:
       context: ./authentication
@@ -79,4 +77,7 @@ services:
       - BACKEND_IP=gateway:80
     command: bash -c "envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
     restart: always
-
+networks:
+  default:
+    driver_opts:
+      encrypted: "true"

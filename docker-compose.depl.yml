@@ -36,8 +36,8 @@ services:
   client-app:
     image: websockets-kafka-demo_client-app:latest
     environment:
-      - BACKEND_URL_HTTP=${HOST_IP}:8080/ws-gateway-http
-      - BACKEND_URL_WS=${HOST_IP}:8080/ws-gateway-ws
+      - BACKEND_URL_HTTP=https://${HOST_IP}:8080/ws-gateway-http
+      - BACKEND_URL_WS=wss://${HOST_IP}:8080/ws-gateway-ws
       - BACKEND_IP=${HOST_IP}:8080
     deploy:
       resources:
@@ -48,8 +48,6 @@ services:
           cpus: '0.1'
           memory: 10M
     command: bash -c "/usr/share/nginx/html/env.sh && envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
-    ports:
-      - "3100:80"
   authentication:
     image: websockets-kafka-demo_authentication:latest
     command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
