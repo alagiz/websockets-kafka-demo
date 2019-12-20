@@ -99,6 +99,14 @@ services:
       - BACKEND_IP=gateway:80
     command: bash -c "envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
     ports:
       - 443:443
 networks:
