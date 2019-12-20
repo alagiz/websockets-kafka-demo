@@ -1,5 +1,20 @@
 # Instructions for enabling of mod_proxy_wstunnel.so:
 
+---
+  aws specific instructions
+---
+* install **httpd**:
+```
+sudo yum install httpd
+```
+* install **mod_ssl**
+```
+sudo yum install mod_ssl
+```
+* rename httpd.aws.conf from this repo to httpd.conf to /etc/httpd/conf
+
+---
+---
 * place mod_proxy_wstunnel.so under modules folder:
   * cp mod_proxy_wstunnel.so /usr/lib64/httpd/modules/
   * chmod 755 /usr/lib64/httpd/modules/mod_proxy_wstunnel.so
