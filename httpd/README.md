@@ -1,7 +1,7 @@
 # Instructions for enabling of mod_proxy_wstunnel.so:
 
 ---
-  aws specific instructions
+  aws specific instructions [based on amzn2-ami-hvm-2.0.20190823.1-x86_64-gp2 (ami-00c03f7f7f2ec15c3)]
 ---
 * install **httpd**:
 ```
