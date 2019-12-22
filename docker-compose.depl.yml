@@ -36,8 +36,8 @@ services:
   client-app:
     image: alagiz/websockets-kafka-demo_client-app:latest
     environment:
-      - BACKEND_URL_HTTP=https://${HOST_IP}:8080/ws-gateway-http
-      - BACKEND_URL_WS=wss://${HOST_IP}:8080/ws-gateway-ws
+      - BACKEND_URL_HTTP=http://${HOST_IP}:8080/ws-gateway-http
+      - BACKEND_URL_WS=ws://${HOST_IP}:8080/ws-gateway-ws
       - BACKEND_IP=${HOST_IP}:8080
     deploy:
       resources:
