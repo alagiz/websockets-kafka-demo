@@ -49,7 +49,7 @@ services:
           memory: 10M
     command: bash -c "/usr/share/nginx/html/env.sh && envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
     ports:
-      - 3000:443
+      - 3000:80
   authentication:
     image: alagiz/websockets-kafka-demo_authentication:latest
     command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
