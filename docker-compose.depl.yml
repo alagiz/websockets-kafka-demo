@@ -77,6 +77,8 @@ services:
         reservations:
           cpus: '0.1'
           memory: 10M
+    ports:
+      - "3102:80"
   performer:
     image: alagiz/websockets-kafka-demo_performer:latest
     restart: always
@@ -93,24 +95,6 @@ services:
           memory: 10M
     ports:
       - "3103:8080"
-  gateway-nginx:
-    image: alagiz/websockets-kafka-demo_gateway-nginx:latest
-    depends_on:
-      - gateway
-    environment:
-      - BACKEND_IP=gateway:80
-    command: bash -c "envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
-    restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 200M
-        reservations:
-          cpus: '0.1'
-          memory: 10M
-    ports:
-      - 443:443
 networks:
   default:
     driver_opts:
