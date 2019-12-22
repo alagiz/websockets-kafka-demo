@@ -34,7 +34,7 @@ services:
     ports:
       - "9092:9092"
   client-app:
-    image: websockets-kafka-demo_client-app:latest
+    image: alagiz/websockets-kafka-demo_client-app:latest
     environment:
       - BACKEND_URL_HTTP=https://${HOST_IP}:8080/ws-gateway-http
       - BACKEND_URL_WS=wss://${HOST_IP}:8080/ws-gateway-ws
@@ -48,8 +48,10 @@ services:
           cpus: '0.1'
           memory: 10M
     command: bash -c "/usr/share/nginx/html/env.sh && envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
+    ports:
+      - 3000:443
   authentication:
-    image: websockets-kafka-demo_authentication:latest
+    image: alagiz/websockets-kafka-demo_authentication:latest
     command: bundle exec rails s -e production -p 80 -b '0.0.0.0'
     deploy:
       resources:
@@ -62,7 +64,7 @@ services:
     ports:
       - "3101:80"
   gateway:
-    image: websockets-kafka-demo_gateway:latest
+    image: alagiz/websockets-kafka-demo_gateway:latest
     command: bash -c "bundle exec karafka server --daemon && bundle exec rails s -e production -p 80 -b '0.0.0.0'"
     environment:
       - AUTHENTICATION_URL=http://authentication:80
@@ -76,7 +78,7 @@ services:
           cpus: '0.1'
           memory: 10M
   performer:
-    image: websockets-kafka-demo_performer:latest
+    image: alagiz/websockets-kafka-demo_performer:latest
     restart: always
     environment:
       - GATEWAY_URL=http://gateway:80
@@ -92,13 +94,21 @@ services:
     ports:
       - "3103:8080"
   gateway-nginx:
-    image: websockets-kafka-demo_gateway-nginx:latest
+    image: alagiz/websockets-kafka-demo_gateway-nginx:latest
     depends_on:
       - gateway
     environment:
       - BACKEND_IP=gateway:80
     command: bash -c "envsubst '$${BACKEND_IP}' </etc/nginx/conf.d/nginx.conf> /etc/nginx/conf.d/nginx.conf && nginx -g \"daemon off;\""
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
     ports:
       - 443:443
 networks:
